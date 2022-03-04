@@ -9,7 +9,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
-import MBProgressHUD
 
 //github issueからとってきたissue一覧を表示するViewController(Viewの役割)
 
@@ -19,7 +18,7 @@ import MBProgressHUD
 
 //インジケーターを通信中に表示するのと、
 //エラー時に再表示ボタンを表示するのができてないです。
-
+//通信結果に応じて、Button.isHiddenを切り替えたら実装できる？
 
 //一覧画面 tapしたら詳細画面に飛ばす
 final class IssueListViewController: UIViewController {

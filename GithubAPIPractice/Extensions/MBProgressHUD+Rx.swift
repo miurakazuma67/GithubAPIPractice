@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 
 //RxSwiftで使うための拡張
+//結局このライブラリ使ってないです
 
 extension Reactive where Base: MBProgressHUD {
     static func isAnimating(view: UIView) -> AnyObserver<Bool> {
