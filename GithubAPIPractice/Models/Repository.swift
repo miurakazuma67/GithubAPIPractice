@@ -20,6 +20,7 @@ struct Issue: Codable {
     let url: URL // 詳細画面に表示し、それをタップしたらSafariViewControllerで開く
     let user: User // 一覧画面にアバター画像と名前を表示
     let updatedAt: String // 一覧画面・詳細画面に表示
+    //Date型のまま流すと、Viewで加工する必要がある
     
     enum CodingKeys: String, CodingKey {
         case number
@@ -40,7 +41,6 @@ protocol Encodable {
     func encode(to encoder: Encoder) throws
 }
 
-//TODO: rename(itemを)
 ///列にデコードしたモデルをアプリ内で受け渡しながら使いまわすよりも、その配列をプロパティとして持つモデルにマッピングしたいことがある場合に必要な拡張
 extension Repository: Decodable {
     init(from decoder: Decoder) throws {

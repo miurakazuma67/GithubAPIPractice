@@ -14,6 +14,8 @@ import RxCocoa
 protocol IssueListViewModelOutput {
     //RxDataSources
     //画面遷移する際に値を渡す
+    //privateで流したい
+    //このままだと、ViewControllerからshowLoadingを流すことができてしまう
     var dataRelay: BehaviorRelay<[SectionModel]> { get }
     // 検索中か
 //    var isLoading: Observable<Bool> { get }
@@ -25,6 +27,11 @@ final class IssueListViewModel: IssueListViewModelOutput {
     private var sectionModel: [SectionModel]!
 
     //(refs: "https://stackoverflow.com/questions/54213183/display-activity-indicator-with-rxswift-and-mvvm")
+    
+//    privateをつけないと、ViewController側からViewModel内のshowLoadingに対して直接acceptしてデータを流すことが出来てしまいます。
+    
+
+
     let showLoading = BehaviorRelay<Bool>(value: true)
     
     /*Outputに関する記述*/

@@ -66,6 +66,7 @@ final class IssueListViewController: UIViewController {
         //データを渡してあげたい場合はinitに投げる
         
         //tableViewのセルをタップした時の処理
+        //キャプチャ宣言が漏れている？
         tableView.rx.modelSelected(Issue.self)
             .subscribe(onNext: { item in
                 Router.shared.showDetailView(from: self, issue: item)
