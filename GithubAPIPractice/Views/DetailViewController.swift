@@ -14,7 +14,7 @@ final class DetailViewController: UIViewController {
     
     //modelのインスタンス
     private var viewModel: DetailViewModel!
-    private var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     private lazy var output: DetailViewModelOutput = viewModel
     
@@ -35,7 +35,8 @@ final class DetailViewController: UIViewController {
     }
 
     //labelにIssueListViewControllerから受け取ったIssueを元に、表示を行う
-    func bind() {
+    // TODO: rename
+    private func bind() {
         self.viewModel.title
             .bind(to: self.titleLabel.rx.text)
             .disposed(by: disposeBag)

@@ -17,8 +17,8 @@ protocol IssueListViewModelOutput {
     //privateで流したい
     //このままだと、ViewControllerからshowLoadingを流すことができてしまう
     var dataRelay: BehaviorRelay<[SectionModel]> { get }
-    // 検索中か
-//    var isLoading: Observable<Bool> { get }
+
+    //各種View用の出力情報をDriverとして出力することができると尚良い
 }
 
 final class IssueListViewModel: IssueListViewModelOutput {
@@ -29,13 +29,20 @@ final class IssueListViewModel: IssueListViewModelOutput {
     //(refs: "https://stackoverflow.com/questions/54213183/display-activity-indicator-with-rxswift-and-mvvm")
     
 //    privateをつけないと、ViewController側からViewModel内のshowLoadingに対して直接acceptしてデータを流すことが出来てしまいます。
-    
+    private let showLoadingRelay = BehaviorRelay<Bool>(value: true)
+    var showLoading: Driver<Bool> {
+        showLoadingRelay.asDriver()
+    }
 
-
-    let showLoading = BehaviorRelay<Bool>(value: true)
     
     /*Outputに関する記述*/
+    //ここもDriverに変換できる？
     lazy var dataRelay = BehaviorRelay<[SectionModel]>(value: [])
+    //↓だとうまくいかなかった
+//    private var dataRelay = BehaviorRelay<[SectionModel]>(value: [])
+//    var dataDriver: Driver<[SectionModel]> {
+//        dataRelay.asDriver()
+//    }
     
     init() {
         sectionModel = [SectionModel(items: [])]
@@ -52,7 +59,7 @@ final class IssueListViewModel: IssueListViewModelOutput {
     //errorを書くとしたらここ？
     //ViewModelからエラーを受け取って、Viewでアラートやボタンの表示を行いたい
     func requestGithubIssue() {
-        showLoading.accept(true)
+        showLoadingRelay.accept(true)
         
         GithubApiModel.shared.rx.request()
             .map { repositories -> [SectionModel] in
@@ -62,7 +69,7 @@ final class IssueListViewModel: IssueListViewModelOutput {
     .bind(to: dataRelay)
     .disposed(by: disposeBag)
     
-        showLoading.accept(false)
+        showLoadingRelay.accept(false)
     }
 
 }

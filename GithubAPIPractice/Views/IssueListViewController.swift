@@ -25,18 +25,18 @@ final class IssueListViewController: UIViewController {
     
     //modelのインスタンス
     private var viewModel = IssueListViewModel()
-    private var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     private lazy var output: IssueListViewModelOutput = viewModel
     
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet weak var indicatorView: UIActivityIndicatorView!
+    @IBOutlet private weak var indicatorView: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.registerCustomCell(IssueListTableViewCell.self)
         setUpTableView()
-        animate()
+        showIndicator()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,7 +46,7 @@ final class IssueListViewController: UIViewController {
         viewModel.requestGithubIssue()
     }
     
-    func setUpTableView() {
+    private func setUpTableView() {
         
         //RxDataSources
         let dataSource = RxTableViewSectionedReloadDataSource<SectionModel>(configureCell: { _, tableView, indexPath, item in
@@ -78,7 +78,7 @@ final class IssueListViewController: UIViewController {
     //request -> 表示の間だけくるくる回るようにしたいが、実装できなかったです
     //出てきたけどよくわからなかったもの "https://github.com/ReactiveX/RxSwift/blob/main/RxExample/RxExample/Services/ActivityIndicator.swift"
     
-    func animate() {
+    private func showIndicator() {
         // isAnimatingのフラグをIndicatorのisAnimatingに連携させる
       viewModel.showLoading.asDriver()
           .drive(indicatorView.rx.isAnimating)

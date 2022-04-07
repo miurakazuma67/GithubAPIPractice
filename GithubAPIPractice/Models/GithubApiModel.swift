@@ -54,8 +54,7 @@ extension Reactive where Base: GithubApiModel {
                 }
             }
             return Disposables.create()
-            //この下のshared以下は不要
-        }.share(replay: 1, scope: .whileConnected)
+        }
         
     }
 }
