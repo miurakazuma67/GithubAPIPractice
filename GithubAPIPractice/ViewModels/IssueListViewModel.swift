@@ -15,9 +15,7 @@ protocol IssueListViewModelOutput {
     //RxDataSources
     //画面遷移する際に値を渡す
     //privateで流したい
-    //このままだと、ViewControllerからshowLoadingを流すことができてしまう
-    var dataRelay: BehaviorRelay<[SectionModel]> { get }
-
+    var issueListStream: Observable<[SectionModel]> { get }
     //各種View用の出力情報をDriverとして出力することができると尚良い
 }
 
@@ -36,13 +34,10 @@ final class IssueListViewModel: IssueListViewModelOutput {
 
     
     /*Outputに関する記述*/
-    //ここもDriverに変換できる？
-    lazy var dataRelay = BehaviorRelay<[SectionModel]>(value: [])
+//    lazy var dataRelay = BehaviorRelay<[SectionModel]>(value: [])
     //↓だとうまくいかなかった
-//    private var dataRelay = BehaviorRelay<[SectionModel]>(value: [])
-//    var dataDriver: Driver<[SectionModel]> {
-//        dataRelay.asDriver()
-//    }
+    private let issueListRelay = BehaviorRelay<[SectionModel]>(value: [])
+    var issueListStream: Observable<[SectionModel]> { issueListRelay.asObservable() }
     
     init() {
         sectionModel = [SectionModel(items: [])]
@@ -50,7 +45,7 @@ final class IssueListViewModel: IssueListViewModelOutput {
         //dataRelayに初期設定のsectionModelを流す
         Observable.deferred { () -> Observable<[SectionModel]> in
             return Observable.just(self.sectionModel)
-        }.bind(to: dataRelay)
+        }.bind(to: issueListRelay)
         .disposed(by: disposeBag)
         
     }
@@ -66,7 +61,7 @@ final class IssueListViewModel: IssueListViewModelOutput {
                 [SectionModel(items: repositories)]
             }
     //dateRelayに新しいSectionModelを流すと勝手にreloadしてくれる
-    .bind(to: dataRelay)
+    .bind(to: issueListRelay)
     .disposed(by: disposeBag)
     
         showLoadingRelay.accept(false)

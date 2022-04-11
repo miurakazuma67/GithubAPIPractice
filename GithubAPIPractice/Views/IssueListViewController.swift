@@ -57,7 +57,7 @@ final class IssueListViewController: UIViewController {
         })
         
         //dateRelayの変更を感知してdataSourceにデータを流す
-        output.dataRelay.asObservable()
+        output.issueListStream
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
