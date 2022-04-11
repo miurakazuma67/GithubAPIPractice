@@ -15,10 +15,8 @@ protocol IssueListViewModelOutput {
     //RxDataSources
     //画面遷移する際に値を渡す
     //privateで流したい
-    //このままだと、ViewControllerからshowLoadingを流すことができてしまう
-    var dataRelay: BehaviorRelay<[SectionModel]> { get }
-    // 検索中か
-//    var isLoading: Observable<Bool> { get }
+    var issueListStream: Observable<[SectionModel]> { get }
+    //各種View用の出力情報をDriverとして出力することができると尚良い
 }
 
 final class IssueListViewModel: IssueListViewModelOutput {
@@ -29,13 +27,17 @@ final class IssueListViewModel: IssueListViewModelOutput {
     //(refs: "https://stackoverflow.com/questions/54213183/display-activity-indicator-with-rxswift-and-mvvm")
     
 //    privateをつけないと、ViewController側からViewModel内のshowLoadingに対して直接acceptしてデータを流すことが出来てしまいます。
-    
+    private let showLoadingRelay = BehaviorRelay<Bool>(value: true)
+    var showLoading: Driver<Bool> {
+        showLoadingRelay.asDriver()
+    }
 
-
-    let showLoading = BehaviorRelay<Bool>(value: true)
     
     /*Outputに関する記述*/
-    lazy var dataRelay = BehaviorRelay<[SectionModel]>(value: [])
+//    lazy var dataRelay = BehaviorRelay<[SectionModel]>(value: [])
+    //↓だとうまくいかなかった
+    private let issueListRelay = BehaviorRelay<[SectionModel]>(value: [])
+    var issueListStream: Observable<[SectionModel]> { issueListRelay.asObservable() }
     
     init() {
         sectionModel = [SectionModel(items: [])]
@@ -43,7 +45,7 @@ final class IssueListViewModel: IssueListViewModelOutput {
         //dataRelayに初期設定のsectionModelを流す
         Observable.deferred { () -> Observable<[SectionModel]> in
             return Observable.just(self.sectionModel)
-        }.bind(to: dataRelay)
+        }.bind(to: issueListRelay)
         .disposed(by: disposeBag)
         
     }
@@ -52,17 +54,17 @@ final class IssueListViewModel: IssueListViewModelOutput {
     //errorを書くとしたらここ？
     //ViewModelからエラーを受け取って、Viewでアラートやボタンの表示を行いたい
     func requestGithubIssue() {
-        showLoading.accept(true)
+        showLoadingRelay.accept(true)
         
         GithubApiModel.shared.rx.request()
             .map { repositories -> [SectionModel] in
                 [SectionModel(items: repositories)]
             }
     //dateRelayに新しいSectionModelを流すと勝手にreloadしてくれる
-    .bind(to: dataRelay)
+    .bind(to: issueListRelay)
     .disposed(by: disposeBag)
     
-        showLoading.accept(false)
+        showLoadingRelay.accept(false)
     }
 
 }

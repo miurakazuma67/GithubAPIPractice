@@ -26,7 +26,7 @@ protocol DetailViewModelOutput {
 
 final class DetailViewModel: DetailViewModelOutput {
     
-    var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     /*Inputに関する記述*/
 //    let urlButtonSelect: Observable<Void>
     
