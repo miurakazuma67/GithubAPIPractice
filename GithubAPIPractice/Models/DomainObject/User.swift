@@ -8,12 +8,8 @@
 import Foundation
 
 ///// Githubのuser情報
-struct User: Codable {
+struct User {
     let login: String
     let avatarURL: URL
 
-    enum CodingKeys: String, CodingKey {
-        case login
-        case avatarURL = "avatar_url"
-    }
 }

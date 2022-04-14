@@ -8,7 +8,6 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import RxDataSources
 
 //github issueからとってきたissue一覧を表示するViewController(Viewの役割)
 
@@ -27,18 +26,22 @@ final class IssueListViewController: UIViewController {
     private var viewModel = IssueListViewModel()
     private let disposeBag = DisposeBag()
     private lazy var output: IssueListViewModelOutput = viewModel
+    //tableView表示用の配列
+    private var issues: [Issue] = []
     
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var indicatorView: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        viewModel.viewDidLoad()
         tableView.registerCustomCell(IssueListTableViewCell.self)
-        setUpTableView()
         showIndicator()
     }
+
     
+    //ViewModelに移動させたい
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -46,50 +49,41 @@ final class IssueListViewController: UIViewController {
         viewModel.requestGithubIssue()
     }
     
-    private func setUpTableView() {
-        
-        //RxDataSources
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionModel>(configureCell: { _, tableView, indexPath, item in
-            let cell = tableView.dequeueReusableCustomCell(with: IssueListTableViewCell.self)
-            cell.setUp(issue: item)
-            
-            return cell
-        })
-        
-        //dateRelayの変更を感知してdataSourceにデータを流す
-        output.issueListStream
-            .bind(to: tableView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
-        
-        //cellをタップしたら画面遷移したい
-        //VCヘの遷移でViewModelのインスタンスを作るときに
-        //データを渡してあげたい場合はinitに投げる
-        
-        //tableViewのセルをタップした時の処理
-        //キャプチャ宣言が漏れている？
-        tableView.rx.modelSelected(Issue.self)
-            .subscribe(onNext: { item in
-                Router.shared.showDetailView(from: self, issue: item)
-                //ここでデータを渡す
-            }).disposed(by: disposeBag)
-        
-    }
     
     //request -> 表示の間だけくるくる回るようにしたいが、実装できなかったです
     //出てきたけどよくわからなかったもの "https://github.com/ReactiveX/RxSwift/blob/main/RxExample/RxExample/Services/ActivityIndicator.swift"
     
     private func showIndicator() {
         // isAnimatingのフラグをIndicatorのisAnimatingに連携させる
-      viewModel.showLoading.asDriver()
-          .drive(indicatorView.rx.isAnimating)
+        viewModel.showLoading.asDriver()
+            .drive(indicatorView.rx.isAnimating)
         //ここまではブレーク貼ってもちゃんと止まるのに、くるくる回らない
-          .disposed(by: disposeBag)
-      // isAnimatingのフラグをIndicatorのisHiddenに連携させる
-      viewModel.showLoading.asDriver()
-          .map { !$0 }
-          .drive(indicatorView.rx.isHidden)
-          .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
+        // isAnimatingのフラグをIndicatorのisHiddenに連携させる
+        viewModel.showLoading.asDriver()
+            .map { !$0 }
+            .drive(indicatorView.rx.isHidden)
+            .disposed(by: disposeBag)
     }
+    
+    
+}
+
+extension IssueListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return issues.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //issueに値が入っていない？
+        let issue = viewModel.cellContent(at: indexPath)
+        let cell = tableView.dequeueReusableCustomCell(with: IssueListTableViewCell.self)
+        cell.setUp(issue: issue)
+        return cell
+    }
+}
+
+extension IssueListViewController: UITableViewDelegate {
     
     
 }

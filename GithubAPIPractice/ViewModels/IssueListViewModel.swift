@@ -12,58 +12,66 @@ import RxCocoa
 
 
 protocol IssueListViewModelOutput {
-    //RxDataSources
-    //画面遷移する際に値を渡す
-    //privateで流したい
-    var issueListStream: Observable<[SectionModel]> { get }
-    //各種View用の出力情報をDriverとして出力することができると尚良い
+    var issueListStream: Signal<[Issue]> { get }
 }
 
 final class IssueListViewModel: IssueListViewModelOutput {
+
+    func cellContent(at indexPath: IndexPath) -> Issue {
+        issueListRelay.value[indexPath.row]
+    }
+
+
     
     private let disposeBag = DisposeBag()
-    private var sectionModel: [SectionModel]!
+    private var issue: [Issue]!
+    private let useCase = IssueListUseCase()
 
     //(refs: "https://stackoverflow.com/questions/54213183/display-activity-indicator-with-rxswift-and-mvvm")
     
-//    privateをつけないと、ViewController側からViewModel内のshowLoadingに対して直接acceptしてデータを流すことが出来てしまいます。
+    //    privateをつけないと、ViewController側からViewModel内のshowLoadingに対して直接acceptしてデータを流すことが出来てしまいます。
     private let showLoadingRelay = BehaviorRelay<Bool>(value: true)
+
+    //indicator用のstream
     var showLoading: Driver<Bool> {
         showLoadingRelay.asDriver()
     }
 
     
     /*Outputに関する記述*/
-//    lazy var dataRelay = BehaviorRelay<[SectionModel]>(value: [])
-    //↓だとうまくいかなかった
-    private let issueListRelay = BehaviorRelay<[SectionModel]>(value: [])
-    var issueListStream: Observable<[SectionModel]> { issueListRelay.asObservable() }
+    private let issueListRelay = BehaviorRelay<[Issue]>(value: [])
+    //Viewで監視するための、readOnlyのObservable
+    var issueListStream: Signal<[Issue]> { issueListRelay.asSignal(onErrorRecover: { _ in .empty() })
+    }
     
     init() {
-        sectionModel = [SectionModel(items: [])]
-        
-        //dataRelayに初期設定のsectionModelを流す
-        Observable.deferred { () -> Observable<[SectionModel]> in
-            return Observable.just(self.sectionModel)
-        }.bind(to: issueListRelay)
-        .disposed(by: disposeBag)
+        setupBindings()
         
     }
+
+    //TODO: APIリクエストを投げる(VM -> UseCase)
+    func viewDidLoad() {
+
+    }
+
+    //useCaseから流れてきたissuesをissueListRelayに入れる
+    private func setupBindings() {
+        useCase.issues.subscribe(onNext: { [weak self] in
+            self?.issueListRelay.accept($0)
+            print($0)
+        }).disposed(by: disposeBag)
+    }
+
+
     
     
     //errorを書くとしたらここ？
     //ViewModelからエラーを受け取って、Viewでアラートやボタンの表示を行いたい
     func requestGithubIssue() {
         showLoadingRelay.accept(true)
-        
-        GithubApiModel.shared.rx.request()
-            .map { repositories -> [SectionModel] in
-                [SectionModel(items: repositories)]
-            }
-    //dateRelayに新しいSectionModelを流すと勝手にreloadしてくれる
-    .bind(to: issueListRelay)
-    .disposed(by: disposeBag)
-    
+
+        useCase.fetch()
+
         showLoadingRelay.accept(false)
     }
 
