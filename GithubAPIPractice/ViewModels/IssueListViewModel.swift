@@ -31,7 +31,13 @@ final class IssueListViewModel: IssueListViewModelOutput {
     //Viewで監視するための、readOnlyのObservable
     var issueListStream: Signal<[Issue]> { issueListRelay.asSignal(onErrorRecover: { _ in .empty() })
     }
-    
+
+    var shouldReload: Signal<Void> {
+        useCase.issues
+            .map { _ in () }
+            .asSignal(onErrorSignalWith: .empty())
+    }
+
     init() {
         setupBindings()
     }
@@ -50,11 +56,15 @@ final class IssueListViewModel: IssueListViewModelOutput {
     }
     
     func cellContent(at indexPath: IndexPath) -> Issue {
-        issueListRelay.value[indexPath.row]
+        // 中身を確認してほしいのでprint打ってます。確認できたら消してください
+        print("cellContent: \(issueListRelay.value[indexPath.row])")
+        return issueListRelay.value[indexPath.row]
     }
-    
+
     func numberOfRows() -> Int {
-        issueListRelay.value.count
+        // 中身を確認してほしいのでprint打ってます。確認できたら消してください
+        print("numberOfRows: \(issueListRelay.value.count)")
+        return issueListRelay.value.count
     }
 
     //ViewModelからエラーを受け取って、Viewでアラートやボタンの表示を行いたい

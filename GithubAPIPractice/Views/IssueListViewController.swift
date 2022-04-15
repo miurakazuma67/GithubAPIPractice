@@ -29,15 +29,22 @@ final class IssueListViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var indicatorView: UIActivityIndicatorView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         viewModel.viewDidLoad()
         tableView.registerCustomCell(IssueListTableViewCell.self)
         showIndicator()
+        setupBindings()
     }
-    
+
+    private func setupBindings() {
+        viewModel.shouldReload.emit(onNext: { [weak self] in
+            self?.tableView.reloadData()
+        }).disposed(by: disposeBag)
+    }
+
     //request -> 表示の間だけくるくる回るようにしたいが、実装できなかったです
     //出てきたけどよくわからなかったもの "https://github.com/ReactiveX/RxSwift/blob/main/RxExample/RxExample/Services/ActivityIndicator.swift"
     
