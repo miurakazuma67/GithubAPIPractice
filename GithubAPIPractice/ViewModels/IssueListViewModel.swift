@@ -32,6 +32,14 @@ final class IssueListViewModel: IssueListViewModelOutput {
     var issueListStream: Signal<[Issue]> { issueListRelay.asSignal(onErrorRecover: { _ in .empty() })
     }
     
+    //useCase.issuesが流れてきたのを、ViewController側に通知する仕組み
+//    ViewControllerでは、それ(shouldReload)を購読してreloadData()
+    var shouldReload: Signal<Void> {
+        useCase.issues
+            .map { _ in () }
+            .asSignal(onErrorSignalWith: .empty())
+    }
+    
     init() {
         setupBindings()
     }
@@ -50,11 +58,11 @@ final class IssueListViewModel: IssueListViewModelOutput {
     }
     
     func cellContent(at indexPath: IndexPath) -> Issue {
-        issueListRelay.value[indexPath.row]
+        return issueListRelay.value[indexPath.row]
     }
     
     func numberOfRows() -> Int {
-        issueListRelay.value.count
+        return issueListRelay.value.count
     }
 
     //ViewModelからエラーを受け取って、Viewでアラートやボタンの表示を行いたい

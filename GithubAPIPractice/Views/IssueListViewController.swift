@@ -36,6 +36,13 @@ final class IssueListViewController: UIViewController {
         viewModel.viewDidLoad()
         tableView.registerCustomCell(IssueListTableViewCell.self)
         showIndicator()
+        setupBindings()
+    }
+    
+    private func setupBindings() {
+        viewModel.shouldReload.emit(onNext: { [weak self] in    //Signalを購読するときはemit
+            self?.tableView.reloadData()    //shouldReloadの変更を感知し、再描画を行う
+        }).disposed(by: disposeBag)
     }
     
     //request -> 表示の間だけくるくる回るようにしたいが、実装できなかったです
@@ -53,8 +60,6 @@ final class IssueListViewController: UIViewController {
             .drive(indicatorView.rx.isHidden)
             .disposed(by: disposeBag)
     }
-    
-    
 }
 
 extension IssueListViewController: UITableViewDataSource {
@@ -72,6 +77,5 @@ extension IssueListViewController: UITableViewDataSource {
 }
 
 extension IssueListViewController: UITableViewDelegate {
-    
-    
+
 }
