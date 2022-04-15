@@ -26,8 +26,6 @@ final class IssueListViewController: UIViewController {
     private var viewModel = IssueListViewModel()
     private let disposeBag = DisposeBag()
     private lazy var output: IssueListViewModelOutput = viewModel
-    //tableView表示用の配列
-    private var issues: [Issue] = []
     
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var indicatorView: UIActivityIndicatorView!
@@ -39,16 +37,6 @@ final class IssueListViewController: UIViewController {
         tableView.registerCustomCell(IssueListTableViewCell.self)
         showIndicator()
     }
-
-    
-    //ViewModelに移動させたい
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        //通信と同期して、インジケータを回す方法がわからなかった
-        viewModel.requestGithubIssue()
-    }
-    
     
     //request -> 表示の間だけくるくる回るようにしたいが、実装できなかったです
     //出てきたけどよくわからなかったもの "https://github.com/ReactiveX/RxSwift/blob/main/RxExample/RxExample/Services/ActivityIndicator.swift"
@@ -71,7 +59,7 @@ final class IssueListViewController: UIViewController {
 
 extension IssueListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return issues.count
+        viewModel.numberOfRows()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

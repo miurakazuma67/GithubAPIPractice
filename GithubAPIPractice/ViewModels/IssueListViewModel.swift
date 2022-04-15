@@ -10,34 +10,22 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-
 protocol IssueListViewModelOutput {
     var issueListStream: Signal<[Issue]> { get }
 }
 
 final class IssueListViewModel: IssueListViewModelOutput {
-
-    func cellContent(at indexPath: IndexPath) -> Issue {
-        issueListRelay.value[indexPath.row]
-    }
-
-
     
     private let disposeBag = DisposeBag()
     private var issue: [Issue]!
     private let useCase = IssueListUseCase()
-
-    //(refs: "https://stackoverflow.com/questions/54213183/display-activity-indicator-with-rxswift-and-mvvm")
     
     //    privateをつけないと、ViewController側からViewModel内のshowLoadingに対して直接acceptしてデータを流すことが出来てしまいます。
     private let showLoadingRelay = BehaviorRelay<Bool>(value: true)
-
     //indicator用のstream
     var showLoading: Driver<Bool> {
         showLoadingRelay.asDriver()
     }
-
-    
     /*Outputに関する記述*/
     private let issueListRelay = BehaviorRelay<[Issue]>(value: [])
     //Viewで監視するための、readOnlyのObservable
@@ -46,14 +34,13 @@ final class IssueListViewModel: IssueListViewModelOutput {
     
     init() {
         setupBindings()
-        
     }
-
+    
     //TODO: APIリクエストを投げる(VM -> UseCase)
     func viewDidLoad() {
-
+        fetchGithubIssue()
     }
-
+    
     //useCaseから流れてきたissuesをissueListRelayに入れる
     private func setupBindings() {
         useCase.issues.subscribe(onNext: { [weak self] in
@@ -61,18 +48,19 @@ final class IssueListViewModel: IssueListViewModelOutput {
             print($0)
         }).disposed(by: disposeBag)
     }
-
-
     
+    func cellContent(at indexPath: IndexPath) -> Issue {
+        issueListRelay.value[indexPath.row]
+    }
     
-    //errorを書くとしたらここ？
-    //ViewModelからエラーを受け取って、Viewでアラートやボタンの表示を行いたい
-    func requestGithubIssue() {
-        showLoadingRelay.accept(true)
-
-        useCase.fetch()
-
-        showLoadingRelay.accept(false)
+    func numberOfRows() -> Int {
+        issueListRelay.value.count
     }
 
+    //ViewModelからエラーを受け取って、Viewでアラートやボタンの表示を行いたい
+    func fetchGithubIssue() {
+        showLoadingRelay.accept(true)
+        useCase.fetch()
+        showLoadingRelay.accept(false)
+    }
 }
