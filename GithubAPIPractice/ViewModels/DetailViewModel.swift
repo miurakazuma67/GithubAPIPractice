@@ -11,10 +11,11 @@ import RxCocoa
 
 protocol DetailViewModelOutput {
     
-    var title: Observable<String> { get }
-    var body: Observable<String> { get }
-    var url: Observable<URL> { get }
-    var updatedAt: Observable<String> { get }
+    //全部Driverに変更する
+    var title: Driver<String> { get }
+    var body: Driver<String> { get }
+    var url: Driver<URL> { get }
+    var updatedAt: Driver<String> { get }
 }
 
 final class DetailViewModel: DetailViewModelOutput {
@@ -23,16 +24,16 @@ final class DetailViewModel: DetailViewModelOutput {
     
     /*Outputに関する記述*/
     //outputsはinputsでViewControllerから受け取ったイベントによって処理をして、その結果をViewControllerに返すのでObservableを使う。
-    let title: Observable<String>
-    let body: Observable<String>
-    let url: Observable<URL>
-    let updatedAt: Observable<String>
+    let title: Driver<String>
+    let body: Driver<String>
+    let url: Driver<URL>
+    let updatedAt: Driver<String>
     
     init(issue: Issue) {
         //justは、単一のものを流すことができる
-        self.title = Observable.just(issue.title)
-        self.body = Observable.just(issue.body)
-        self.url = Observable.just(issue.url)
-        self.updatedAt = Observable.just(issue.updatedAt)
+        self.title = Driver.just(issue.title)
+        self.body = Driver.just(issue.body)
+        self.url = Driver.just(issue.url)
+        self.updatedAt = Driver.just(issue.updatedAt)
     }
 }

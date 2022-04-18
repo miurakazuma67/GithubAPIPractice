@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		A406065827C9E21400440A49 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A406065727C9E21400440A49 /* DetailViewModel.swift */; };
 		A406065A27C9E22200440A49 /* IssueListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A406065927C9E22200440A49 /* IssueListViewModel.swift */; };
-		A406065E27CCD30700440A49 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A406065D27CCD30700440A49 /* User.swift */; };
 		A409090427B78213000C0D16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409090327B78213000C0D16 /* AppDelegate.swift */; };
 		A409090627B78213000C0D16 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409090527B78213000C0D16 /* SceneDelegate.swift */; };
 		A409090827B78213000C0D16 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409090727B78213000C0D16 /* IssueListViewController.swift */; };
@@ -25,7 +24,6 @@
 		A409094227BE30A9000C0D16 /* TableView +.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409094127BE30A9000C0D16 /* TableView +.swift */; };
 		A409094427BE30EF000C0D16 /* TableViewCell +.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409094327BE30EF000C0D16 /* TableViewCell +.swift */; };
 		A409094627BF87E6000C0D16 /* GithubIssuesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409094527BF87E6000C0D16 /* GithubIssuesRepository.swift */; };
-		A42DB38628068CF000CBB9A4 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42DB38528068CF000CBB9A4 /* Issue.swift */; };
 		A42DB38A28069CA900CBB9A4 /* IssueListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42DB38928069CA900CBB9A4 /* IssueListUseCase.swift */; };
 		A478249527CD1B300038D923 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = A478249427CD1B300038D923 /* RxDataSources */; };
 		A478249A27CDD1070038D923 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A478249927CDD1070038D923 /* Kingfisher */; };
@@ -35,6 +33,9 @@
 		A4EC76D527D0B04500ECE310 /* UIButton +.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EC76D427D0B04500ECE310 /* UIButton +.swift */; };
 		A4EC76DA27D0C81F00ECE310 /* RxOptional in Frameworks */ = {isa = PBXBuildFile; productRef = A4EC76D927D0C81F00ECE310 /* RxOptional */; };
 		A4EC76E727D1F58700ECE310 /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = A4EC76E627D1F58700ECE310 /* MBProgressHUD */; };
+		CD720C89280D39920088E2FF /* GithubIssuesRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD720C88280D39920088E2FF /* GithubIssuesRepositoryProtocol.swift */; };
+		CD720C8C280D608F0088E2FF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD720C8B280D608F0088E2FF /* User.swift */; };
+		CD720C8E280D609C0088E2FF /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD720C8D280D609C0088E2FF /* Issue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +58,6 @@
 /* Begin PBXFileReference section */
 		A406065727C9E21400440A49 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		A406065927C9E22200440A49 /* IssueListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewModel.swift; sourceTree = "<group>"; };
-		A406065D27CCD30700440A49 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A409090027B78213000C0D16 /* GithubAPIPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubAPIPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A409090327B78213000C0D16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A409090527B78213000C0D16 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,12 +77,14 @@
 		A409094127BE30A9000C0D16 /* TableView +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView +.swift"; sourceTree = "<group>"; };
 		A409094327BE30EF000C0D16 /* TableViewCell +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableViewCell +.swift"; sourceTree = "<group>"; };
 		A409094527BF87E6000C0D16 /* GithubIssuesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubIssuesRepository.swift; sourceTree = "<group>"; };
-		A42DB38528068CF000CBB9A4 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		A42DB38928069CA900CBB9A4 /* IssueListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListUseCase.swift; sourceTree = "<group>"; };
 		A478249B27CDD7A50038D923 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
 		A478249D27CDE9A60038D923 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		A478249F27CDEF860038D923 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		A4EC76D427D0B04500ECE310 /* UIButton +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton +.swift"; sourceTree = "<group>"; };
+		CD720C88280D39920088E2FF /* GithubIssuesRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubIssuesRepositoryProtocol.swift; sourceTree = "<group>"; };
+		CD720C8B280D608F0088E2FF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		CD720C8D280D609C0088E2FF /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,9 +194,8 @@
 		A409093D27BE22F1000C0D16 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A42DB38928069CA900CBB9A4 /* IssueListUseCase.swift */,
-				A409094527BF87E6000C0D16 /* GithubIssuesRepository.swift */,
-				A42DB3882806902600CBB9A4 /* DomainObject */,
+				CD720C86280D393A0088E2FF /* Infra */,
+				CD720C87280D39550088E2FF /* Domain */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -208,15 +209,6 @@
 				A4EC76D427D0B04500ECE310 /* UIButton +.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		A42DB3882806902600CBB9A4 /* DomainObject */ = {
-			isa = PBXGroup;
-			children = (
-				A406065D27CCD30700440A49 /* User.swift */,
-				A42DB38528068CF000CBB9A4 /* Issue.swift */,
-			);
-			path = DomainObject;
 			sourceTree = "<group>";
 		};
 		A478249327CD1B300038D923 /* Frameworks */ = {
@@ -250,6 +242,33 @@
 				A478249D27CDE9A60038D923 /* Router.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		CD720C86280D393A0088E2FF /* Infra */ = {
+			isa = PBXGroup;
+			children = (
+				A409094527BF87E6000C0D16 /* GithubIssuesRepository.swift */,
+			);
+			path = Infra;
+			sourceTree = "<group>";
+		};
+		CD720C87280D39550088E2FF /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				A42DB38928069CA900CBB9A4 /* IssueListUseCase.swift */,
+				CD720C88280D39920088E2FF /* GithubIssuesRepositoryProtocol.swift */,
+				CD720C8A280D607C0088E2FF /* DomainObject */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		CD720C8A280D607C0088E2FF /* DomainObject */ = {
+			isa = PBXGroup;
+			children = (
+				CD720C8B280D608F0088E2FF /* User.swift */,
+				CD720C8D280D609C0088E2FF /* Issue.swift */,
+			);
+			path = DomainObject;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -398,11 +417,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A406065E27CCD30700440A49 /* User.swift in Sources */,
 				A409090827B78213000C0D16 /* IssueListViewController.swift in Sources */,
-				A42DB38628068CF000CBB9A4 /* Issue.swift in Sources */,
+				CD720C89280D39920088E2FF /* GithubIssuesRepositoryProtocol.swift in Sources */,
+				CD720C8E280D609C0088E2FF /* Issue.swift in Sources */,
 				A409090427B78213000C0D16 /* AppDelegate.swift in Sources */,
 				A42DB38A28069CA900CBB9A4 /* IssueListUseCase.swift in Sources */,
+				CD720C8C280D608F0088E2FF /* User.swift in Sources */,
 				A4EC76D527D0B04500ECE310 /* UIButton +.swift in Sources */,
 				A409090627B78213000C0D16 /* SceneDelegate.swift in Sources */,
 				A409094027BE3094000C0D16 /* NSObject +.swift in Sources */,

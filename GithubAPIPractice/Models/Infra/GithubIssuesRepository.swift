@@ -8,11 +8,7 @@
 import Foundation
 import RxSwift
 
-final class GithubIssuesRepository {
-    
-    //シングルトンにする
-    //テスタブルじゃなくなってしまうから、避けた方がいい
-    static let shared = GithubIssuesRepository()
+final class GithubIssuesRepository: GithubIssuesRepositoryProtocol {
     //UseCaseでのエラーを防ぐためにpublic指定
     public init () {}
 

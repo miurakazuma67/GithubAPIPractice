@@ -18,7 +18,7 @@ final class IssueListViewModel: IssueListViewModelOutput {
     
     private let disposeBag = DisposeBag()
     private var issue: [Issue]!
-    private let useCase = IssueListUseCase()
+    private let useCase = IssueListUseCase(repository: GithubIssuesRepository())
     
     //    privateをつけないと、ViewController側からViewModel内のshowLoadingに対して直接acceptしてデータを流すことが出来てしまいます。
     private let showLoadingRelay = BehaviorRelay<Bool>(value: true)

@@ -45,6 +45,19 @@ final class IssueListViewController: UIViewController {
         }).disposed(by: disposeBag)
     }
     
+//    weak self キャプチャ漏れを確認するための参考
+//    private func cellTapped() {
+//        // tableViewのセルをタップした時のメソッド
+//        tableView.rx.itemSelected
+//            .subscribe(onNext: { [weak self] indexPath in
+//                guard let strongSelf = self else { return }
+//                //詳細画面に飛ばす
+//                //値渡しもする
+//                Router.shared.showDetailView(from: strongSelf)
+//            })
+//            .disposed(by: disposeBag)
+//    }
+    
     //request -> 表示の間だけくるくる回るようにしたいが、実装できなかったです
     //出てきたけどよくわからなかったもの "https://github.com/ReactiveX/RxSwift/blob/main/RxExample/RxExample/Services/ActivityIndicator.swift"
     
@@ -68,7 +81,6 @@ extension IssueListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //issueに値が入っていない？
         let issue = viewModel.cellContent(at: indexPath)
         let cell = tableView.dequeueReusableCustomCell(with: IssueListTableViewCell.self)
         cell.setUp(issue: issue)
@@ -77,5 +89,8 @@ extension IssueListViewController: UITableViewDataSource {
 }
 
 extension IssueListViewController: UITableViewDelegate {
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let issue = viewModel.cellContent(at: indexPath)
+        Router.shared.showDetailView(from: self, issue: issue)
+    }
 }
