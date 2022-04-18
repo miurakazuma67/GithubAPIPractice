@@ -21,23 +21,19 @@
 		A409092727B78216000C0D16 /* GithubAPIPracticeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409092627B78216000C0D16 /* GithubAPIPracticeUITestsLaunchTests.swift */; };
 		A409093927B9F903000C0D16 /* IssueListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409093727B9F903000C0D16 /* IssueListTableViewCell.swift */; };
 		A409093A27B9F903000C0D16 /* IssueListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A409093827B9F903000C0D16 /* IssueListTableViewCell.xib */; };
-		A409093C27BE22CD000C0D16 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409093B27BE22CD000C0D16 /* Repository.swift */; };
 		A409094027BE3094000C0D16 /* NSObject +.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409093F27BE3094000C0D16 /* NSObject +.swift */; };
 		A409094227BE30A9000C0D16 /* TableView +.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409094127BE30A9000C0D16 /* TableView +.swift */; };
 		A409094427BE30EF000C0D16 /* TableViewCell +.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409094327BE30EF000C0D16 /* TableViewCell +.swift */; };
-		A409094627BF87E6000C0D16 /* GithubApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409094527BF87E6000C0D16 /* GithubApiModel.swift */; };
+		A409094627BF87E6000C0D16 /* GithubIssuesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409094527BF87E6000C0D16 /* GithubIssuesRepository.swift */; };
+		A42DB38628068CF000CBB9A4 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42DB38528068CF000CBB9A4 /* Issue.swift */; };
+		A42DB38A28069CA900CBB9A4 /* IssueListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42DB38928069CA900CBB9A4 /* IssueListUseCase.swift */; };
 		A478249527CD1B300038D923 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = A478249427CD1B300038D923 /* RxDataSources */; };
 		A478249A27CDD1070038D923 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A478249927CDD1070038D923 /* Kingfisher */; };
 		A478249C27CDD7A50038D923 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A478249B27CDD7A50038D923 /* Detail.storyboard */; };
 		A478249E27CDE9A70038D923 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = A478249D27CDE9A60038D923 /* Router.swift */; };
 		A47824A027CDEF860038D923 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A478249F27CDEF860038D923 /* DetailViewController.swift */; };
-		A49C3F5E27C0CF710047681F /* RxDataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49C3F5D27C0CF710047681F /* RxDataSources.swift */; };
-		A4EC76CF27D023EE00ECE310 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EC76CE27D023EE00ECE310 /* WebViewController.swift */; };
-		A4EC76D127D0240C00ECE310 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EC76D027D0240C00ECE310 /* WebViewModel.swift */; };
 		A4EC76D527D0B04500ECE310 /* UIButton +.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EC76D427D0B04500ECE310 /* UIButton +.swift */; };
-		A4EC76D727D0C37300ECE310 /* WebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4EC76D627D0C37300ECE310 /* WebView.storyboard */; };
 		A4EC76DA27D0C81F00ECE310 /* RxOptional in Frameworks */ = {isa = PBXBuildFile; productRef = A4EC76D927D0C81F00ECE310 /* RxOptional */; };
-		A4EC76E427D1F4BA00ECE310 /* MBProgressHUD+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EC76E327D1F4B900ECE310 /* MBProgressHUD+Rx.swift */; };
 		A4EC76E727D1F58700ECE310 /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = A4EC76E627D1F58700ECE310 /* MBProgressHUD */; };
 /* End PBXBuildFile section */
 
@@ -77,20 +73,16 @@
 		A409092627B78216000C0D16 /* GithubAPIPracticeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAPIPracticeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A409093727B9F903000C0D16 /* IssueListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListTableViewCell.swift; sourceTree = "<group>"; };
 		A409093827B9F903000C0D16 /* IssueListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueListTableViewCell.xib; sourceTree = "<group>"; };
-		A409093B27BE22CD000C0D16 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		A409093F27BE3094000C0D16 /* NSObject +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject +.swift"; sourceTree = "<group>"; };
 		A409094127BE30A9000C0D16 /* TableView +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView +.swift"; sourceTree = "<group>"; };
 		A409094327BE30EF000C0D16 /* TableViewCell +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableViewCell +.swift"; sourceTree = "<group>"; };
-		A409094527BF87E6000C0D16 /* GithubApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubApiModel.swift; sourceTree = "<group>"; };
+		A409094527BF87E6000C0D16 /* GithubIssuesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubIssuesRepository.swift; sourceTree = "<group>"; };
+		A42DB38528068CF000CBB9A4 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
+		A42DB38928069CA900CBB9A4 /* IssueListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListUseCase.swift; sourceTree = "<group>"; };
 		A478249B27CDD7A50038D923 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
 		A478249D27CDE9A60038D923 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		A478249F27CDEF860038D923 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		A49C3F5D27C0CF710047681F /* RxDataSources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxDataSources.swift; sourceTree = "<group>"; };
-		A4EC76CE27D023EE00ECE310 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		A4EC76D027D0240C00ECE310 /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
 		A4EC76D427D0B04500ECE310 /* UIButton +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton +.swift"; sourceTree = "<group>"; };
-		A4EC76D627D0C37300ECE310 /* WebView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WebView.storyboard; sourceTree = "<group>"; };
-		A4EC76E327D1F4B900ECE310 /* MBProgressHUD+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MBProgressHUD+Rx.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +119,6 @@
 			children = (
 				A406065927C9E22200440A49 /* IssueListViewModel.swift */,
 				A406065727C9E21400440A49 /* DetailViewModel.swift */,
-				A4EC76D027D0240C00ECE310 /* WebViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -137,7 +128,6 @@
 			children = (
 				A409090727B78213000C0D16 /* IssueListViewController.swift */,
 				A478249F27CDEF860038D923 /* DetailViewController.swift */,
-				A4EC76CE27D023EE00ECE310 /* WebViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -202,10 +192,9 @@
 		A409093D27BE22F1000C0D16 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A409093B27BE22CD000C0D16 /* Repository.swift */,
-				A406065D27CCD30700440A49 /* User.swift */,
-				A409094527BF87E6000C0D16 /* GithubApiModel.swift */,
-				A49C3F5D27C0CF710047681F /* RxDataSources.swift */,
+				A42DB38928069CA900CBB9A4 /* IssueListUseCase.swift */,
+				A409094527BF87E6000C0D16 /* GithubIssuesRepository.swift */,
+				A42DB3882806902600CBB9A4 /* DomainObject */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -216,10 +205,18 @@
 				A409093F27BE3094000C0D16 /* NSObject +.swift */,
 				A409094327BE30EF000C0D16 /* TableViewCell +.swift */,
 				A409094127BE30A9000C0D16 /* TableView +.swift */,
-				A4EC76E327D1F4B900ECE310 /* MBProgressHUD+Rx.swift */,
 				A4EC76D427D0B04500ECE310 /* UIButton +.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A42DB3882806902600CBB9A4 /* DomainObject */ = {
+			isa = PBXGroup;
+			children = (
+				A406065D27CCD30700440A49 /* User.swift */,
+				A42DB38528068CF000CBB9A4 /* Issue.swift */,
+			);
+			path = DomainObject;
 			sourceTree = "<group>";
 		};
 		A478249327CD1B300038D923 /* Frameworks */ = {
@@ -243,7 +240,6 @@
 			children = (
 				A409090927B78213000C0D16 /* IssueList.storyboard */,
 				A478249B27CDD7A50038D923 /* Detail.storyboard */,
-				A4EC76D627D0C37300ECE310 /* WebView.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -377,7 +373,6 @@
 				A409090D27B78216000C0D16 /* Assets.xcassets in Resources */,
 				A409090B27B78213000C0D16 /* IssueList.storyboard in Resources */,
 				A478249C27CDD7A50038D923 /* Detail.storyboard in Resources */,
-				A4EC76D727D0C37300ECE310 /* WebView.storyboard in Resources */,
 				A409093A27B9F903000C0D16 /* IssueListTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,24 +399,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				A406065E27CCD30700440A49 /* User.swift in Sources */,
-				A49C3F5E27C0CF710047681F /* RxDataSources.swift in Sources */,
 				A409090827B78213000C0D16 /* IssueListViewController.swift in Sources */,
-				A4EC76D127D0240C00ECE310 /* WebViewModel.swift in Sources */,
+				A42DB38628068CF000CBB9A4 /* Issue.swift in Sources */,
 				A409090427B78213000C0D16 /* AppDelegate.swift in Sources */,
+				A42DB38A28069CA900CBB9A4 /* IssueListUseCase.swift in Sources */,
 				A4EC76D527D0B04500ECE310 /* UIButton +.swift in Sources */,
-				A409093C27BE22CD000C0D16 /* Repository.swift in Sources */,
 				A409090627B78213000C0D16 /* SceneDelegate.swift in Sources */,
 				A409094027BE3094000C0D16 /* NSObject +.swift in Sources */,
 				A409094227BE30A9000C0D16 /* TableView +.swift in Sources */,
-				A409094627BF87E6000C0D16 /* GithubApiModel.swift in Sources */,
+				A409094627BF87E6000C0D16 /* GithubIssuesRepository.swift in Sources */,
 				A406065827C9E21400440A49 /* DetailViewModel.swift in Sources */,
 				A478249E27CDE9A70038D923 /* Router.swift in Sources */,
 				A406065A27C9E22200440A49 /* IssueListViewModel.swift in Sources */,
-				A4EC76E427D1F4BA00ECE310 /* MBProgressHUD+Rx.swift in Sources */,
 				A47824A027CDEF860038D923 /* DetailViewController.swift in Sources */,
 				A409094427BE30EF000C0D16 /* TableViewCell +.swift in Sources */,
 				A409093927B9F903000C0D16 /* IssueListTableViewCell.swift in Sources */,
-				A4EC76CF27D023EE00ECE310 /* WebViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

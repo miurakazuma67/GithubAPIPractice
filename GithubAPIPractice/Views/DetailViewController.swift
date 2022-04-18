@@ -35,7 +35,6 @@ final class DetailViewController: UIViewController {
     }
 
     //labelにIssueListViewControllerから受け取ったIssueを元に、表示を行う
-    // TODO: rename
     private func bind() {
         self.viewModel.title
             .bind(to: self.titleLabel.rx.text)
@@ -54,17 +53,6 @@ final class DetailViewController: UIViewController {
             .bind(to: urlButton.rx.title())
             .disposed(by: disposeBag)
     }
-    
-    
-//    func show() {
-//        urlButton.rx.tap
-//ここで、ボタンタップ時にissueを渡し、urlを元に通信処理を行いたかったが、実装できてません。
-//urlを渡して遷移させたい
-//            .asSignal()
-//            .emit(onNext: { item in
-//                Router.shared.showWebView(from: self, issue: item)  //DetailVCを確認
-//            }).disposed(by: disposeBag)
-//    }
     
     //画面遷移用
     static func makeFromStoryboard()->DetailViewController {

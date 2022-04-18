@@ -8,7 +8,6 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import RxDataSources
 
 //github issueからとってきたissue一覧を表示するViewController(Viewの役割)
 
@@ -33,46 +32,17 @@ final class IssueListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        viewModel.viewDidLoad()
         tableView.registerCustomCell(IssueListTableViewCell.self)
-        setUpTableView()
         showIndicator()
+        setupBindings()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        //通信と同期して、インジケータを回す方法がわからなかった
-        viewModel.requestGithubIssue()
-    }
-    
-    private func setUpTableView() {
-        
-        //RxDataSources
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionModel>(configureCell: { _, tableView, indexPath, item in
-            let cell = tableView.dequeueReusableCustomCell(with: IssueListTableViewCell.self)
-            cell.setUp(issue: item)
-            
-            return cell
-        })
-        
-        //dateRelayの変更を感知してdataSourceにデータを流す
-        output.issueListStream
-            .bind(to: tableView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
-        
-        //cellをタップしたら画面遷移したい
-        //VCヘの遷移でViewModelのインスタンスを作るときに
-        //データを渡してあげたい場合はinitに投げる
-        
-        //tableViewのセルをタップした時の処理
-        //キャプチャ宣言が漏れている？
-        tableView.rx.modelSelected(Issue.self)
-            .subscribe(onNext: { item in
-                Router.shared.showDetailView(from: self, issue: item)
-                //ここでデータを渡す
-            }).disposed(by: disposeBag)
-        
+    private func setupBindings() {
+        viewModel.shouldReload.emit(onNext: { [weak self] in    //Signalを購読するときはemit
+            self?.tableView.reloadData()    //shouldReloadの変更を感知し、再描画を行う
+        }).disposed(by: disposeBag)
     }
     
     //request -> 表示の間だけくるくる回るようにしたいが、実装できなかったです
@@ -80,16 +50,32 @@ final class IssueListViewController: UIViewController {
     
     private func showIndicator() {
         // isAnimatingのフラグをIndicatorのisAnimatingに連携させる
-      viewModel.showLoading.asDriver()
-          .drive(indicatorView.rx.isAnimating)
+        viewModel.showLoading.asDriver()
+            .drive(indicatorView.rx.isAnimating)
         //ここまではブレーク貼ってもちゃんと止まるのに、くるくる回らない
-          .disposed(by: disposeBag)
-      // isAnimatingのフラグをIndicatorのisHiddenに連携させる
-      viewModel.showLoading.asDriver()
-          .map { !$0 }
-          .drive(indicatorView.rx.isHidden)
-          .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
+        // isAnimatingのフラグをIndicatorのisHiddenに連携させる
+        viewModel.showLoading.asDriver()
+            .map { !$0 }
+            .drive(indicatorView.rx.isHidden)
+            .disposed(by: disposeBag)
+    }
+}
+
+extension IssueListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.numberOfRows()
     }
     
-    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //issueに値が入っていない？
+        let issue = viewModel.cellContent(at: indexPath)
+        let cell = tableView.dequeueReusableCustomCell(with: IssueListTableViewCell.self)
+        cell.setUp(issue: issue)
+        return cell
+    }
+}
+
+extension IssueListViewController: UITableViewDelegate {
+
 }
