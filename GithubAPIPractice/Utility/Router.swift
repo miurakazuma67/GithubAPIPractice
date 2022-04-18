@@ -27,13 +27,6 @@ final class Router {
         show(from: from, to: vc)
     }
     
-    func showWebView(from: UIViewController, issue: Issue) {
-        let vc = WebViewController.makeFromStoryboard()
-        let viewModel = WebViewModel(issue: issue)
-        vc.inject(viewModel: viewModel)
-        show(from: from, to: vc)
-    }
-    
     private func show(from: UIViewController, to: UIViewController, completion:(() -> Void)? = nil){
         if let nav = from.navigationController {
             nav.pushViewController(to, animated: true)

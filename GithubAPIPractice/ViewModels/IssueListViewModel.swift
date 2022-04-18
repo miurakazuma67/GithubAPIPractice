@@ -33,7 +33,7 @@ final class IssueListViewModel: IssueListViewModelOutput {
     }
     
     //useCase.issuesが流れてきたのを、ViewController側に通知する仕組み
-//    ViewControllerでは、それ(shouldReload)を購読してreloadData()
+    //    ViewControllerでは、それ(shouldReload)を購読してreloadData()
     var shouldReload: Signal<Void> {
         useCase.issues
             .map { _ in () }
@@ -44,7 +44,6 @@ final class IssueListViewModel: IssueListViewModelOutput {
         setupBindings()
     }
     
-    //TODO: APIリクエストを投げる(VM -> UseCase)
     func viewDidLoad() {
         fetchGithubIssue()
     }
@@ -64,7 +63,7 @@ final class IssueListViewModel: IssueListViewModelOutput {
     func numberOfRows() -> Int {
         return issueListRelay.value.count
     }
-
+    
     //ViewModelからエラーを受け取って、Viewでアラートやボタンの表示を行いたい
     func fetchGithubIssue() {
         showLoadingRelay.accept(true)

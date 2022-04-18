@@ -16,6 +16,5 @@ struct Issue {
     let user: User // 一覧画面にアバター画像と名前を表示
     let updatedAt: String // 一覧画面・詳細画面に表示
     //Date型のまま流すと、Viewで加工する必要がある
-
-
+    
 }

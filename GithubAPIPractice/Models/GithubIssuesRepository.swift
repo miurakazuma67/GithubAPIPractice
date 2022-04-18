@@ -18,7 +18,6 @@ final class GithubIssuesRepository {
 
     ///リクエスト
     func fetch() -> Single<[Issue]> {
-        //        Single.just([Issue()])    //実際の通信は後回しでモックのデータを使っていい
         Single.create { observer in
 
             let url = URL(string: "https://api.github.com/repos/rails/rails/issues")!
@@ -35,10 +34,10 @@ final class GithubIssuesRepository {
                                 url: $0.url,
                                 user: .init(login: $0.user.login, avatarURL: $0.user.avatarURL),
                                 updatedAt: $0.updatedAt
-)
+                            )
                         }
                     ))
-
+                    
                 } catch {
                     //error時の処理
                     //UIの処理はメインスレッドで書かなければならないので、Viewで行う
@@ -61,7 +60,7 @@ private struct IssueDTO: Decodable {
     let user: UserDTO // 一覧画面にアバター画像と名前を表示
     let updatedAt: String // 一覧画面・詳細画面に表示
     //Date型のまま流すと、Viewで加工する必要がある
-
+    
     enum CodingKeys: String, CodingKey {
         case number
         case title
@@ -75,7 +74,7 @@ private struct IssueDTO: Decodable {
 private struct UserDTO: Decodable {
     let login: String
     let avatarURL: URL
-
+    
     enum CodingKeys: String, CodingKey {
         case login
         case avatarURL = "avatar_url"

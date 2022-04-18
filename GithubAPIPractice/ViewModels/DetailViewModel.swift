@@ -9,13 +9,6 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-//ボタンの入力を検知して、urlを元にしてrequestを行いたい
-
-// ボタンの入力シーケンス
-//struct DetailViewModelInput {
-//    var urlButtonSelect: Observable<Void>
-//}
-
 protocol DetailViewModelOutput {
     
     var title: Observable<String> { get }

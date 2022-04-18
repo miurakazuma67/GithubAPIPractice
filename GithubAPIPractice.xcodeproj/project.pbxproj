@@ -32,12 +32,8 @@
 		A478249C27CDD7A50038D923 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A478249B27CDD7A50038D923 /* Detail.storyboard */; };
 		A478249E27CDE9A70038D923 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = A478249D27CDE9A60038D923 /* Router.swift */; };
 		A47824A027CDEF860038D923 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A478249F27CDEF860038D923 /* DetailViewController.swift */; };
-		A4EC76CF27D023EE00ECE310 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EC76CE27D023EE00ECE310 /* WebViewController.swift */; };
-		A4EC76D127D0240C00ECE310 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EC76D027D0240C00ECE310 /* WebViewModel.swift */; };
 		A4EC76D527D0B04500ECE310 /* UIButton +.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EC76D427D0B04500ECE310 /* UIButton +.swift */; };
-		A4EC76D727D0C37300ECE310 /* WebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4EC76D627D0C37300ECE310 /* WebView.storyboard */; };
 		A4EC76DA27D0C81F00ECE310 /* RxOptional in Frameworks */ = {isa = PBXBuildFile; productRef = A4EC76D927D0C81F00ECE310 /* RxOptional */; };
-		A4EC76E427D1F4BA00ECE310 /* MBProgressHUD+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EC76E327D1F4B900ECE310 /* MBProgressHUD+Rx.swift */; };
 		A4EC76E727D1F58700ECE310 /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = A4EC76E627D1F58700ECE310 /* MBProgressHUD */; };
 /* End PBXBuildFile section */
 
@@ -86,11 +82,7 @@
 		A478249B27CDD7A50038D923 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
 		A478249D27CDE9A60038D923 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		A478249F27CDEF860038D923 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		A4EC76CE27D023EE00ECE310 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		A4EC76D027D0240C00ECE310 /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
 		A4EC76D427D0B04500ECE310 /* UIButton +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton +.swift"; sourceTree = "<group>"; };
-		A4EC76D627D0C37300ECE310 /* WebView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WebView.storyboard; sourceTree = "<group>"; };
-		A4EC76E327D1F4B900ECE310 /* MBProgressHUD+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MBProgressHUD+Rx.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +119,6 @@
 			children = (
 				A406065927C9E22200440A49 /* IssueListViewModel.swift */,
 				A406065727C9E21400440A49 /* DetailViewModel.swift */,
-				A4EC76D027D0240C00ECE310 /* WebViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -137,7 +128,6 @@
 			children = (
 				A409090727B78213000C0D16 /* IssueListViewController.swift */,
 				A478249F27CDEF860038D923 /* DetailViewController.swift */,
-				A4EC76CE27D023EE00ECE310 /* WebViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -215,7 +205,6 @@
 				A409093F27BE3094000C0D16 /* NSObject +.swift */,
 				A409094327BE30EF000C0D16 /* TableViewCell +.swift */,
 				A409094127BE30A9000C0D16 /* TableView +.swift */,
-				A4EC76E327D1F4B900ECE310 /* MBProgressHUD+Rx.swift */,
 				A4EC76D427D0B04500ECE310 /* UIButton +.swift */,
 			);
 			path = Extensions;
@@ -251,7 +240,6 @@
 			children = (
 				A409090927B78213000C0D16 /* IssueList.storyboard */,
 				A478249B27CDD7A50038D923 /* Detail.storyboard */,
-				A4EC76D627D0C37300ECE310 /* WebView.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -385,7 +373,6 @@
 				A409090D27B78216000C0D16 /* Assets.xcassets in Resources */,
 				A409090B27B78213000C0D16 /* IssueList.storyboard in Resources */,
 				A478249C27CDD7A50038D923 /* Detail.storyboard in Resources */,
-				A4EC76D727D0C37300ECE310 /* WebView.storyboard in Resources */,
 				A409093A27B9F903000C0D16 /* IssueListTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,7 +400,6 @@
 			files = (
 				A406065E27CCD30700440A49 /* User.swift in Sources */,
 				A409090827B78213000C0D16 /* IssueListViewController.swift in Sources */,
-				A4EC76D127D0240C00ECE310 /* WebViewModel.swift in Sources */,
 				A42DB38628068CF000CBB9A4 /* Issue.swift in Sources */,
 				A409090427B78213000C0D16 /* AppDelegate.swift in Sources */,
 				A42DB38A28069CA900CBB9A4 /* IssueListUseCase.swift in Sources */,
@@ -425,11 +411,9 @@
 				A406065827C9E21400440A49 /* DetailViewModel.swift in Sources */,
 				A478249E27CDE9A70038D923 /* Router.swift in Sources */,
 				A406065A27C9E22200440A49 /* IssueListViewModel.swift in Sources */,
-				A4EC76E427D1F4BA00ECE310 /* MBProgressHUD+Rx.swift in Sources */,
 				A47824A027CDEF860038D923 /* DetailViewController.swift in Sources */,
 				A409094427BE30EF000C0D16 /* TableViewCell +.swift in Sources */,
 				A409093927B9F903000C0D16 /* IssueListTableViewCell.swift in Sources */,
-				A4EC76CF27D023EE00ECE310 /* WebViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
