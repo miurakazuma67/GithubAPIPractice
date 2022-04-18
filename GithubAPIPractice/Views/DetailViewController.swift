@@ -37,20 +37,20 @@ final class DetailViewController: UIViewController {
     //labelにIssueListViewControllerから受け取ったIssueを元に、表示を行う
     private func setupBindings() {
         self.viewModel.title
-            .bind(to: self.titleLabel.rx.text)
+            .drive(titleLabel.rx.text)
             .disposed(by: disposeBag)
         
         self.viewModel.body
-            .bind(to: self.bodyLabel.rx.text)
+            .drive(bodyLabel.rx.text)
             .disposed(by: disposeBag)
         
         self.viewModel.updatedAt
-            .bind(to: self.updatedAtLabel.rx.text)
+            .drive(updatedAtLabel.rx.text)
             .disposed(by: disposeBag)
         //textViewにリンク埋め込みでWebView開くように実装したかったが、やり方わからなかったのでボタンに表示している
         self.viewModel.url
             .map{$0 .absoluteString}
-            .bind(to: urlButton.rx.title())
+            .drive(urlButton.rx.title())
             .disposed(by: disposeBag)
     }
     
