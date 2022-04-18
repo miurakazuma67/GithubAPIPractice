@@ -11,6 +11,7 @@ import RxCocoa
 
 protocol DetailViewModelOutput {
     
+    //全部Driverに変更する
     var title: Observable<String> { get }
     var body: Observable<String> { get }
     var url: Observable<URL> { get }

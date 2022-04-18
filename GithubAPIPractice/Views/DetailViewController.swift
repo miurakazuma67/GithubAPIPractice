@@ -31,11 +31,11 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bind()
+        setupBindings()
     }
 
     //labelにIssueListViewControllerから受け取ったIssueを元に、表示を行う
-    private func bind() {
+    private func setupBindings() {
         self.viewModel.title
             .bind(to: self.titleLabel.rx.text)
             .disposed(by: disposeBag)

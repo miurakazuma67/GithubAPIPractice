@@ -11,10 +11,10 @@ import RxRelay
 //publicで書く理由: VMから参照したいから(repositoryからは参照しない)
 
 public class IssueListUseCase {
-    private let repository = GithubIssuesRepository()
+
     private let disposeBag = DisposeBag()
-
-
+    //repositoryをGithubIssuesRepositoryProtocolに適合させる(testableにするため)
+    private let repository: GithubIssuesRepositoryProtocol
     private let issuesRelay = BehaviorRelay<[Issue]?>(value: nil)
     //publicつかなかった
     var issues: Observable<[Issue]> {
@@ -23,7 +23,8 @@ public class IssueListUseCase {
             .asObservable()    //Observableに変換する
     }
 
-    public init() {
+    init(repository: GithubIssuesRepositoryProtocol) {
+        self.repository = repository
     }
 
     func fetch() {
