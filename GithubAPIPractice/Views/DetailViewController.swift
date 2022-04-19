@@ -15,8 +15,6 @@ final class DetailViewController: UIViewController {
     //modelのインスタンス
     private var viewModel: DetailViewModel!
     private let disposeBag = DisposeBag()
-
-    private lazy var output: DetailViewModelOutput = viewModel
     
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var bodyLabel: UILabel!
@@ -47,7 +45,7 @@ final class DetailViewController: UIViewController {
         self.viewModel.updatedAt
             .drive(updatedAtLabel.rx.text)
             .disposed(by: disposeBag)
-        //textViewにリンク埋め込みでWebView開くように実装したかったが、やり方わからなかったのでボタンに表示している
+
         self.viewModel.url
             .map{$0 .absoluteString}
             .drive(urlButton.rx.title())
