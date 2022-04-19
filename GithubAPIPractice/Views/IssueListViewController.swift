@@ -25,7 +25,6 @@ final class IssueListViewController: UIViewController {
     //modelのインスタンス
     private var viewModel = IssueListViewModel()
     private let disposeBag = DisposeBag()
-    private lazy var output: IssueListViewModelOutput = viewModel
     
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var indicatorView: UIActivityIndicatorView!
