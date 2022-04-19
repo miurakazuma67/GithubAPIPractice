@@ -10,23 +10,21 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-protocol IssueListViewModelOutput {
-    var issueListStream: Signal<[Issue]> { get }
-}
 
-final class IssueListViewModel: IssueListViewModelOutput {
+final class IssueListViewModel {
     
     private let disposeBag = DisposeBag()
     private var issue: [Issue]!
     private let useCase = IssueListUseCase(repository: GithubIssuesRepository())
     
-    //    privateをつけないと、ViewController側からViewModel内のshowLoadingに対して直接acceptしてデータを流すことが出来てしまいます。
-    private let showLoadingRelay = BehaviorRelay<Bool>(value: true)
     //indicator用のstream
-    var showLoading: Driver<Bool> {
-        showLoadingRelay.asDriver()
+    //UseCaseは進行中かどうか以外は知らない(通信中かどうかは知らない)ので、命名を工夫する
+    //これはVCでも使うので、表示のされ方も考慮した命名にする
+    //VM -> VでUI表示を意識するので、Driverは出てくるとしたらVM (UseCaseでは出てこない)
+    var isIndicatorVisible: Driver<Bool> {
+        useCase.isProcessing.asDriver(onErrorJustReturn: false)
     }
-    /*Outputに関する記述*/
+    
     private let issueListRelay = BehaviorRelay<[Issue]>(value: [])
     //Viewで監視するための、readOnlyのObservable
     var issueListStream: Signal<[Issue]> { issueListRelay.asSignal(onErrorRecover: { _ in .empty() })
@@ -66,8 +64,6 @@ final class IssueListViewModel: IssueListViewModelOutput {
     
     //ViewModelからエラーを受け取って、Viewでアラートやボタンの表示を行いたい
     func fetchGithubIssue() {
-        showLoadingRelay.accept(true)
         useCase.fetch()
-        showLoadingRelay.accept(false)
     }
 }

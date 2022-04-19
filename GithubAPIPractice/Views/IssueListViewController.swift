@@ -39,8 +39,8 @@ final class IssueListViewController: UIViewController {
     }
     
     private func setupBindings() {
-        viewModel.shouldReload.emit(onNext: { [weak self] in    //Signalを購読するときはemit
-            self?.tableView.reloadData()    //shouldReloadの変更を感知し、再描画を行う
+        viewModel.shouldReload.emit(onNext: { [weak self] in //Signalを購読するときはemit
+            self?.tableView.reloadData() //shouldReloadの変更を感知し、再描画を行う
         }).disposed(by: disposeBag)
     }
     
@@ -57,19 +57,10 @@ final class IssueListViewController: UIViewController {
 //            .disposed(by: disposeBag)
 //    }
     
-    //request -> 表示の間だけくるくる回るようにしたいが、実装できなかったです
-    //出てきたけどよくわからなかったもの "https://github.com/ReactiveX/RxSwift/blob/main/RxExample/RxExample/Services/ActivityIndicator.swift"
-    
     private func showIndicator() {
         // isAnimatingのフラグをIndicatorのisAnimatingに連携させる
-        viewModel.showLoading.asDriver()
+        viewModel.isIndicatorVisible.asDriver()
             .drive(indicatorView.rx.isAnimating)
-        //ここまではブレーク貼ってもちゃんと止まるのに、くるくる回らない
-            .disposed(by: disposeBag)
-        // isAnimatingのフラグをIndicatorのisHiddenに連携させる
-        viewModel.showLoading.asDriver()
-            .map { !$0 }
-            .drive(indicatorView.rx.isHidden)
             .disposed(by: disposeBag)
     }
 }

@@ -9,16 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-protocol DetailViewModelOutput {
-    
-    //全部Driverに変更する
-    var title: Driver<String> { get }
-    var body: Driver<String> { get }
-    var url: Driver<URL> { get }
-    var updatedAt: Driver<String> { get }
-}
-
-final class DetailViewModel: DetailViewModelOutput {
+final class DetailViewModel {
     
     private let disposeBag = DisposeBag()
     
