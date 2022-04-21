@@ -33,11 +33,10 @@ final class GithubIssuesRepository: GithubIssuesRepositoryProtocol {
                             )
                         }
                     ))
-                    
-                } catch {
-                    //error時の処理
-                    //UIの処理はメインスレッドで書かなければならないので、Viewで行う
-                    //画面遷移し、エラーメッセージとリトライボタンをつける
+                }
+                catch {
+                    //これでerrorになったことが伝わる
+                    observer(.failure(error))
                 }
             }
             task.resume()

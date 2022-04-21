@@ -25,6 +25,10 @@ final class IssueListViewModel {
         useCase.isProcessing.asDriver(onErrorJustReturn: false)
     }
     
+    var requestedShowAlert: Signal<Void> {
+        useCase.informFailure.asSignal(onErrorSignalWith: .empty())
+    }
+    
     private let issueListRelay = BehaviorRelay<[Issue]>(value: [])
     //Viewで監視するための、readOnlyのObservable
     var issueListStream: Signal<[Issue]> { issueListRelay.asSignal(onErrorRecover: { _ in .empty() })
@@ -50,7 +54,6 @@ final class IssueListViewModel {
     private func setupBindings() {
         useCase.issues.subscribe(onNext: { [weak self] in
             self?.issueListRelay.accept($0)
-            print($0)
         }).disposed(by: disposeBag)
     }
     

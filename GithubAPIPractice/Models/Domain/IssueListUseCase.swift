@@ -22,6 +22,12 @@ public class IssueListUseCase {
     var isProcessing: Observable<Bool> {
         isProcessingRelay.asObservable()
     }
+ 
+    private let informFailureRelay = PublishRelay<Void>()
+    //error通知用のstream
+    var informFailure: Observable<Void> {
+        informFailureRelay.asObservable()
+    }
     
     //publicつかなかった
     var issues: Observable<[Issue]> {
@@ -44,6 +50,7 @@ public class IssueListUseCase {
                 },
                 onFailure: { [weak self] _ in //_ を置く順番と、必要な理由(onFailure時にはエラーを渡すが、使わないことを明示したいからアンダースコアを置く)
                     self?.isProcessingRelay.accept(false) //通信失敗時に、falseを流さないといけない
+                    self?.informFailureRelay.accept(()) //通信失敗時に、falseを流さないといけない
                 }
             )
             .disposed(by: disposeBag) //講読破棄

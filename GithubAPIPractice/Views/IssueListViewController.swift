@@ -9,16 +9,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-//github issueからとってきたissue一覧を表示するViewController(Viewの役割)
-
-//    View -> ViewModel: セルタップのイベントを伝える
-//    ViewModel -> View: 画面遷移を行うようにイベントを発行する（次の画面で必要なパラメーターがあれば、このイベントで渡します）
-//    View: 画面遷移する
-
-//インジケーターを通信中に表示するのと、
-//エラー時に再表示ボタンを表示するのができてないです。
-//通信結果に応じて、Button.isHiddenを切り替えたら実装できる？
-
 //一覧画面 tapしたら詳細画面に飛ばす
 final class IssueListViewController: UIViewController {
     
@@ -35,6 +25,7 @@ final class IssueListViewController: UIViewController {
         viewModel.viewDidLoad()
         tableView.registerCustomCell(IssueListTableViewCell.self)
         showIndicator()
+        requestedShowAlertAndRetry()
         setupBindings()
     }
     
@@ -49,7 +40,8 @@ final class IssueListViewController: UIViewController {
 //        // tableViewのセルをタップした時のメソッド
 //        tableView.rx.itemSelected
 //            .subscribe(onNext: { [weak self] indexPath in
-//                guard let strongSelf = self else { return }
+//                guard let strongSelf = self else { return } weak selfをかくとselfがオプショナルになる
+//ので、guard letでオプショナルを外す
 //                //詳細画面に飛ばす
 //                //値渡しもする
 //                Router.shared.showDetailView(from: strongSelf)
@@ -63,6 +55,31 @@ final class IssueListViewController: UIViewController {
             .drive(indicatorView.rx.isAnimating)
             .disposed(by: disposeBag)
     }
+    
+    private func requestedShowAlertAndRetry() {
+        viewModel.requestedShowAlert
+            .emit(onNext: { [weak self] _ in
+                let alert: UIAlertController = UIAlertController(title: "エラー", message: "通信に失敗しました", preferredStyle:  UIAlertController.Style.alert)
+
+                let defaultAction: UIAlertAction = UIAlertAction(title: "リトライ", style: UIAlertAction.Style.default, handler:{
+                    
+                    (action: UIAlertAction!) -> Void in
+                    self?.viewModel.viewDidLoad()
+                })
+                
+                let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler:{
+                    
+                    (action: UIAlertAction!) -> Void in
+                })
+
+                alert.addAction(cancelAction)
+                alert.addAction(defaultAction)
+
+                self?.present(alert, animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
+    }
+
 }
 
 extension IssueListViewController: UITableViewDataSource {

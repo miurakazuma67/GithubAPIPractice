@@ -6,107 +6,17 @@
         "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
         "state": {
           "branch": null,
-          "revision": "32e4acdf6971f58f5ad552389cf2d7d016334eaf",
-          "version": "7.2.0"
-        }
-      },
-      {
-        "package": "Logger",
-        "repositoryURL": "https://github.com/f-meloni/Logger",
-        "state": {
-          "branch": null,
-          "revision": "53c3ecca5abe8cf46697e33901ee774236d94cce",
-          "version": "0.2.3"
-        }
-      },
-      {
-        "package": "MBProgressHUD",
-        "repositoryURL": "https://github.com/jdg/MBProgressHUD.git",
-        "state": {
-          "branch": null,
-          "revision": "bca42b801100b2b3a4eda0ba8dd33d858c780b0d",
-          "version": "1.2.0"
-        }
-      },
-      {
-        "package": "Nimble",
-        "repositoryURL": "https://github.com/Quick/Nimble.git",
-        "state": {
-          "branch": null,
-          "revision": "7a46a5fc86cb917f69e3daf79fcb045283d8f008",
-          "version": "8.1.2"
-        }
-      },
-      {
-        "package": "PackageConfig",
-        "repositoryURL": "https://github.com/shibapm/PackageConfig.git",
-        "state": {
-          "branch": null,
-          "revision": "bf90dc69fa0792894b08a0b74cf34029694ae486",
-          "version": "0.13.0"
-        }
-      },
-      {
-        "package": "Quick",
-        "repositoryURL": "https://github.com/Quick/Quick.git",
-        "state": {
-          "branch": null,
-          "revision": "09b3becb37cb2163919a3842a4c5fa6ec7130792",
-          "version": "2.2.1"
-        }
-      },
-      {
-        "package": "Rocket",
-        "repositoryURL": "https://github.com/shibapm/Rocket",
-        "state": {
-          "branch": null,
-          "revision": "f75c9736733b489a3456b4f3a47cf13adb99f197",
-          "version": "0.9.2"
-        }
-      },
-      {
-        "package": "RxDataSources",
-        "repositoryURL": "https://github.com/RxSwiftCommunity/RxDataSources.git",
-        "state": {
-          "branch": "main",
-          "revision": "f671317335633fe9396fd3522dca1f5e64fc29c1",
-          "version": null
-        }
-      },
-      {
-        "package": "RxOptional",
-        "repositoryURL": "https://github.com/RxSwiftCommunity/RxOptional",
-        "state": {
-          "branch": null,
-          "revision": "98a1895918e9ba9735a15207dd9c7120e9f51843",
-          "version": "4.1.0"
+          "revision": "1a7b5480eb750a8e171654b9b1cb0a2cbeb27a55",
+          "version": "7.2.1"
         }
       },
       {
         "package": "RxSwift",
-        "repositoryURL": "git@github.com:ReactiveX/RxSwift.git",
+        "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
         "state": {
           "branch": "main",
-          "revision": "7741a11cb4252c379c8e034508cb1b92b8b40427",
+          "revision": "416180ae6eb5473332e5e0581aeb1c20e95874b8",
           "version": null
-        }
-      },
-      {
-        "package": "SwiftShell",
-        "repositoryURL": "https://github.com/kareman/SwiftShell",
-        "state": {
-          "branch": null,
-          "revision": "beebe43c986d89ea5359ac3adcb42dac94e5e08a",
-          "version": "4.1.2"
-        }
-      },
-      {
-        "package": "Yams",
-        "repositoryURL": "https://github.com/jpsim/Yams",
-        "state": {
-          "branch": null,
-          "revision": "c947a306d2e80ecb2c0859047b35c73b8e1ca27f",
-          "version": "2.0.0"
         }
       }
     ]
