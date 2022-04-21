@@ -9,10 +9,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-//詳細画面
+// 詳細画面
 final class DetailViewController: UIViewController {
     
-    //modelのインスタンス
+    // modelのインスタンス
     private var viewModel: DetailViewModel!
     private let disposeBag = DisposeBag()
     
@@ -21,7 +21,7 @@ final class DetailViewController: UIViewController {
     @IBOutlet private weak var urlButton: UIButton!
     @IBOutlet private weak var updatedAtLabel: UILabel!
     
-    //viewModelを外部から渡す
+    // viewModelを外部から渡す
     func inject(viewModel: DetailViewModel) {
         self.viewModel = viewModel
     }
@@ -32,7 +32,7 @@ final class DetailViewController: UIViewController {
         setupBindings()
     }
 
-    //labelにIssueListViewControllerから受け取ったIssueを元に、表示を行う
+    // labelにIssueListViewControllerから受け取ったIssueを元に、表示を行う
     private func setupBindings() {
         self.viewModel.title
             .drive(titleLabel.rx.text)
@@ -52,7 +52,7 @@ final class DetailViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    //画面遷移用
+    // 画面遷移用
     static func makeFromStoryboard()->DetailViewController {
         UIStoryboard(name: "Detail", bundle: nil).instantiateInitialViewController() as! DetailViewController
     }

@@ -25,39 +25,15 @@ final class IssueListViewController: UIViewController {
         viewModel.viewDidLoad()
         tableView.registerCustomCell(IssueListTableViewCell.self)
         showIndicator()
-        requestedShowAlertAndRetry()
         setupBindings()
     }
     
     private func setupBindings() {
-        viewModel.shouldReload.emit(onNext: { [weak self] in //Signalを購読するときはemit
-            self?.tableView.reloadData() //shouldReloadの変更を感知し、再描画を行う
+        viewModel.shouldReload.emit(onNext: { [weak self] in // Signalを購読するときはemit
+            self?.tableView.reloadData() // shouldReloadの変更を感知し、再描画を行う
         }).disposed(by: disposeBag)
-    }
-    
-//    weak self キャプチャ漏れを確認するための参考
-//    private func cellTapped() {
-//        // tableViewのセルをタップした時のメソッド
-//        tableView.rx.itemSelected
-//            .subscribe(onNext: { [weak self] indexPath in
-//                guard let strongSelf = self else { return } weak selfをかくとselfがオプショナルになる
-//ので、guard letでオプショナルを外す
-//                //詳細画面に飛ばす
-//                //値渡しもする
-//                Router.shared.showDetailView(from: strongSelf)
-//            })
-//            .disposed(by: disposeBag)
-//    }
-    
-    private func showIndicator() {
-        // isAnimatingのフラグをIndicatorのisAnimatingに連携させる
-        viewModel.isIndicatorVisible.asDriver()
-            .drive(indicatorView.rx.isAnimating)
-            .disposed(by: disposeBag)
-    }
-    
-    private func requestedShowAlertAndRetry() {
-        viewModel.requestedShowAlert
+        
+        viewModel.requestedShowAlertAndRetry
             .emit(onNext: { [weak self] _ in
                 let alert: UIAlertController = UIAlertController(title: "エラー", message: "通信に失敗しました", preferredStyle:  UIAlertController.Style.alert)
 
@@ -77,6 +53,13 @@ final class IssueListViewController: UIViewController {
 
                 self?.present(alert, animated: true, completion: nil)
             })
+            .disposed(by: disposeBag)
+    }
+
+    private func showIndicator() {
+ // isAnimatingのフラグをIndicatorのisAnimatingに連携させる
+        viewModel.isIndicatorVisible.asDriver()
+            .drive(indicatorView.rx.isAnimating)
             .disposed(by: disposeBag)
     }
 
