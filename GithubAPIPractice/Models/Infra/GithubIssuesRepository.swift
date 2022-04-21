@@ -33,11 +33,10 @@ final class GithubIssuesRepository: GithubIssuesRepositoryProtocol {
                             )
                         }
                     ))
-                    
-                } catch {
-                    //error時の処理
-                    //UIの処理はメインスレッドで書かなければならないので、Viewで行う
-                    //画面遷移し、エラーメッセージとリトライボタンをつける
+                }
+                catch {
+                    //これでerrorになったことが伝わる
+                    observer(.failure(error))
                 }
             }
             task.resume()
@@ -55,7 +54,7 @@ private struct IssueDTO: Decodable {
     let url: URL // 詳細画面に表示し、それをタップしたらSafariViewControllerで開く
     let user: UserDTO // 一覧画面にアバター画像と名前を表示
     let updatedAt: String // 一覧画面・詳細画面に表示
-    //Date型のまま流すと、Viewで加工する必要がある
+    // Date型のまま流すと、Viewで加工する必要がある
     
     enum CodingKeys: String, CodingKey {
         case number

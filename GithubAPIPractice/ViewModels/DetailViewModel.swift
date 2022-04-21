@@ -9,28 +9,17 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-protocol DetailViewModelOutput {
-    
-    //全部Driverに変更する
-    var title: Driver<String> { get }
-    var body: Driver<String> { get }
-    var url: Driver<URL> { get }
-    var updatedAt: Driver<String> { get }
-}
+final class DetailViewModel {
 
-final class DetailViewModel: DetailViewModelOutput {
-    
     private let disposeBag = DisposeBag()
-    
-    /*Outputに関する記述*/
-    //outputsはinputsでViewControllerから受け取ったイベントによって処理をして、その結果をViewControllerに返すのでObservableを使う。
+
     let title: Driver<String>
     let body: Driver<String>
     let url: Driver<URL>
     let updatedAt: Driver<String>
-    
+
     init(issue: Issue) {
-        //justは、単一のものを流すことができる
+        // justは、単一のものを流すことができる
         self.title = Driver.just(issue.title)
         self.body = Driver.just(issue.body)
         self.url = Driver.just(issue.url)
