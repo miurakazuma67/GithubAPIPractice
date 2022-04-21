@@ -21,10 +21,8 @@ final class IssueListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         viewModel.viewDidLoad()
         tableView.registerCustomCell(IssueListTableViewCell.self)
-        showIndicator()
         setupBindings()
     }
     
@@ -33,18 +31,23 @@ final class IssueListViewController: UIViewController {
             self?.tableView.reloadData() // shouldReloadの変更を感知し、再描画を行う
         }).disposed(by: disposeBag)
         
+ // isAnimatingのフラグをIndicatorのisAnimatingに連携させる
+        viewModel.isIndicatorVisible.asDriver()
+            .drive(indicatorView.rx.isAnimating)
+            .disposed(by: disposeBag)
+
         viewModel.requestedShowAlertAndRetry
             .emit(onNext: { [weak self] _ in
                 let alert: UIAlertController = UIAlertController(title: "エラー", message: "通信に失敗しました", preferredStyle:  UIAlertController.Style.alert)
 
                 let defaultAction: UIAlertAction = UIAlertAction(title: "リトライ", style: UIAlertAction.Style.default, handler:{
-                    
+
                     (action: UIAlertAction!) -> Void in
                     self?.viewModel.viewDidLoad()
                 })
-                
+
                 let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler:{
-                    
+
                     (action: UIAlertAction!) -> Void in
                 })
 
@@ -53,13 +56,6 @@ final class IssueListViewController: UIViewController {
 
                 self?.present(alert, animated: true, completion: nil)
             })
-            .disposed(by: disposeBag)
-    }
-
-    private func showIndicator() {
- // isAnimatingのフラグをIndicatorのisAnimatingに連携させる
-        viewModel.isIndicatorVisible.asDriver()
-            .drive(indicatorView.rx.isAnimating)
             .disposed(by: disposeBag)
     }
 
