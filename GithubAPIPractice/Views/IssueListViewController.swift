@@ -58,7 +58,6 @@ final class IssueListViewController: UIViewController {
             })
             .disposed(by: disposeBag)
     }
-
 }
 
 extension IssueListViewController: UITableViewDataSource {

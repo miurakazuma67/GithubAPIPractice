@@ -25,6 +25,8 @@
 		A409094427BE30EF000C0D16 /* TableViewCell +.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409094327BE30EF000C0D16 /* TableViewCell +.swift */; };
 		A409094627BF87E6000C0D16 /* GithubIssuesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409094527BF87E6000C0D16 /* GithubIssuesRepository.swift */; };
 		A42DB38A28069CA900CBB9A4 /* IssueListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42DB38928069CA900CBB9A4 /* IssueListUseCase.swift */; };
+		A45DE49028A51F9000D3763C /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = A45DE48F28A51F9000D3763C /* RxTest */; };
+		A45DE49228A51F9500D3763C /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = A45DE49128A51F9500D3763C /* RxBlocking */; };
 		A478249C27CDD7A50038D923 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A478249B27CDD7A50038D923 /* Detail.storyboard */; };
 		A478249E27CDE9A70038D923 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = A478249D27CDE9A60038D923 /* Router.swift */; };
 		A47824A027CDEF860038D923 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A478249F27CDEF860038D923 /* DetailViewController.swift */; };
@@ -90,6 +92,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A45DE49028A51F9000D3763C /* RxTest in Frameworks */,
+				A45DE49228A51F9500D3763C /* RxBlocking in Frameworks */,
 				CD6D7A8628111C8800FFC9C0 /* Kingfisher in Frameworks */,
 				CD6D7A8328111C3F00FFC9C0 /* RxSwift in Frameworks */,
 				CD6D7A8128111C3F00FFC9C0 /* RxRelay in Frameworks */,
@@ -289,6 +293,8 @@
 				CD6D7A8028111C3F00FFC9C0 /* RxRelay */,
 				CD6D7A8228111C3F00FFC9C0 /* RxSwift */,
 				CD6D7A8528111C8800FFC9C0 /* Kingfisher */,
+				A45DE48F28A51F9000D3763C /* RxTest */,
+				A45DE49128A51F9500D3763C /* RxBlocking */,
 			);
 			productName = GithubAPIPractice;
 			productReference = A409090027B78213000C0D16 /* GithubAPIPractice.app */;
@@ -791,6 +797,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A45DE48F28A51F9000D3763C /* RxTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD6D7A7D28111C3F00FFC9C0 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxTest;
+		};
+		A45DE49128A51F9500D3763C /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD6D7A7D28111C3F00FFC9C0 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
 		CD6D7A7E28111C3F00FFC9C0 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CD6D7A7D28111C3F00FFC9C0 /* XCRemoteSwiftPackageReference "RxSwift" */;

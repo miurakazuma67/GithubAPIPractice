@@ -29,8 +29,10 @@ final class IssueListViewModel {
         useCase.informFailure.asSignal(onErrorSignalWith: .empty())
     }
 
+    // useCaseから流れてきた値を入れるためのBehaviorRelay
     private let issueListRelay = BehaviorRelay<[Issue]>(value: [])
-    // Viewで監視するための、readOnlyのObservable
+    // Viewで監視するための、外部公開用のObservable
+    // 中でSignalに変換
     var issueListStream: Signal<[Issue]> { issueListRelay.asSignal(onErrorRecover: { _ in .empty() })
     }
 
