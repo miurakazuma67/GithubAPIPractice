@@ -12,11 +12,11 @@ import RxCocoa
 
 
 final class IssueListViewModel {
-    
+
     private let disposeBag = DisposeBag()
     private var issue: [Issue]!
     private let useCase = IssueListUseCase(repository: GithubIssuesRepository())
-    
+
     // indicator用のstream
     // UseCaseは進行中かどうか以外は知らない(通信中かどうかは知らない)ので、命名を工夫する
     // これはVCでも使うので、表示のされ方も考慮した命名にする

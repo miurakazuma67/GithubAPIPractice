@@ -47,6 +47,8 @@ final class GithubIssuesRepository: GithubIssuesRepositoryProtocol {
 
 extension GithubIssuesRepository: ReactiveCompatible{}
 
+// DTO -> 可変。外から変更可能
+// 異なるレイヤー間(Model層、View層など)でデータを受け渡す際に使う
 private struct IssueDTO: Decodable {
     let number: Int
     let title: String // 一覧画面・詳細画面に表示
@@ -55,7 +57,7 @@ private struct IssueDTO: Decodable {
     let user: UserDTO // 一覧画面にアバター画像と名前を表示
     let updatedAt: String // 一覧画面・詳細画面に表示
     // Date型のまま流すと、Viewで加工する必要がある
-    
+
     enum CodingKeys: String, CodingKey {
         case number
         case title

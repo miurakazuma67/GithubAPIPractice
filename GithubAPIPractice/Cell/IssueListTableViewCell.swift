@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 
 final class IssueListTableViewCell: UITableViewCell {
-    
+
     @IBOutlet private weak var userImageView: UIImageView!
     @IBOutlet private weak var userUrlLabel: UILabel!
     @IBOutlet private weak var titleLabel: UILabel!
@@ -22,7 +22,7 @@ final class IssueListTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     func setUp(issue: Issue) {
         userUrlLabel.text = issue.user.login
         titleLabel.text = issue.title

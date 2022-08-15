@@ -16,7 +16,7 @@ public class IssueListUseCase {
     // repositoryをGithubIssuesRepositoryProtocolに適合させる(testableにするため)
     private let repository: GithubIssuesRepositoryProtocol
     private let issuesRelay = BehaviorRelay<[Issue]?>(value: nil)
-    // privateをつけないと、ViewController側からViewModel内のshowLoadingに対して直接acceptしてデータを流すことが出来てしまいます。
+    // privateをつけないと、ViewController側からViewModel内のshowLoadingに対して直接acceptしてデータを流すことが出来てしまう
     private let isProcessingRelay = BehaviorRelay<Bool>(value: true)
     // indicator用のstream
     var isProcessing: Observable<Bool> {
@@ -33,7 +33,7 @@ public class IssueListUseCase {
     var issues: Observable<[Issue]> {
         issuesRelay
             .compactMap { $0 } // issuesRelayの中でnilじゃないものをissuesに入れ、
-            .asObservable() // Observableに変換する
+            .asObservable() // Observableに変換
     }
 
     init(repository: GithubIssuesRepositoryProtocol) {
@@ -49,8 +49,8 @@ public class IssueListUseCase {
                     self?.isProcessingRelay.accept(false) // indicatorの表示もストップ
                 },
                 onFailure: { [weak self] _ in // _ を置く順番と、必要な理由(onFailure時にはエラーを渡すが、使わないことを明示したいからアンダースコアを置く)
-                    self?.isProcessingRelay.accept(false) // 通信失敗時に、falseを流さないといけない
-                    self?.informFailureRelay.accept(()) // 通信失敗時に、falseを流さないといけない
+                    self?.isProcessingRelay.accept(false) // 通信失敗時に、falseを流す
+                    self?.informFailureRelay.accept(()) // 通信失敗時に、falseを流す
                 }
             )
             .disposed(by: disposeBag) // 講読破棄
