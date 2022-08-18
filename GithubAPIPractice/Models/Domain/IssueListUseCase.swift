@@ -41,6 +41,7 @@ public class IssueListUseCase {
     }
 
     func fetch() {
+        // 通信中であることを伝える
         isProcessingRelay.accept(true)
         repository.fetch() // repositoryからデータをとってくる
             .subscribe(
