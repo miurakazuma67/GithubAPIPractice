@@ -19,6 +19,7 @@ public class IssueListUseCase {
     // privateをつけないと、ViewController側からViewModel内のshowLoadingに対して直接acceptしてデータを流すことが出来てしまう
     private let isProcessingRelay = BehaviorRelay<Bool>(value: true)
     // indicator用のstream
+    // コンピューテッドプロパティ(値を保持せず、計算した値を返すもの)のgetを省略したもの?
     var isProcessing: Observable<Bool> {
         isProcessingRelay.asObservable()
     }
