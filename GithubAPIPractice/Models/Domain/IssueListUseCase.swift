@@ -20,6 +20,8 @@ public class IssueListUseCase {
     private let isProcessingRelay = BehaviorRelay<Bool>(value: true)
     // indicator用のstream
     // コンピューテッドプロパティ(値を保持せず、計算した値を返すもの)のgetを省略したもの?
+    // RelayをObservableに変換して返している
+    // asObservableすることで、BehaviorRelayの機能を隠蔽している
     var isProcessing: Observable<Bool> {
         isProcessingRelay.asObservable()
     }
