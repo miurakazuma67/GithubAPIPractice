@@ -52,17 +52,19 @@ final class IssueListViewModel {
         fetchGithubIssue()
     }
 
-    // useCaseから流れてきたissuesをissueListRelayに入れる
+    ///useCaseから流れてきたissuesをissueListRelayに入れる
     private func setupBindings() {
         useCase.issues.subscribe(onNext: { [weak self] in
             self?.issueListRelay.accept($0)
         }).disposed(by: disposeBag)
     }
 
+    ///cellの中身を設定するメソッド
     func cellContent(at indexPath: IndexPath) -> Issue {
         return issueListRelay.value[indexPath.row]
     }
 
+    ///cellのindexPathを返すメソッド
     func numberOfRows() -> Int {
         return issueListRelay.value.count
     }
